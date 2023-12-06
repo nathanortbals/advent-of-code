@@ -6,7 +6,7 @@ internal class Solution : AdventOfCode.Solution
 {
     public override int Year => 2023;
 
-    public override int Day => 02;
+    public override int Day => 2;
 
     public override string Name => "Cube Conundrum";
 
