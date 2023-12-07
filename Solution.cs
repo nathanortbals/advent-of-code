@@ -43,7 +43,7 @@ internal abstract class Solution
         Console.ResetColor();
     }
 
-    protected abstract int SolvePart1(string input);
+    protected abstract long SolvePart1(string input);
 
-    protected abstract int SolvePart2(string input);
+    protected abstract long SolvePart2(string input);
 }

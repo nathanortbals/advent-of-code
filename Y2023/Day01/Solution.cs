@@ -10,12 +10,12 @@ internal class Solution : AdventOfCode.Solution
 
     public override string Name => "Trebuchet?!";
 
-    protected override int SolvePart1(string input)
+    protected override long SolvePart1(string input)
     {
         return SolveGeneric(input, @"\d");
     }
 
-    protected override int SolvePart2(string input)
+    protected override long SolvePart2(string input)
     {
         return SolveGeneric(input, @"\d|one|two|three|four|five|six|seven|eight|nine");
     }

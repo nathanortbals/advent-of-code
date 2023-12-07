@@ -16,7 +16,7 @@ internal partial class Solution : AdventOfCode.Solution
 
     private record SchematicCharacter(char Char, int RowIndex, int ColumnIndex);
 
-    protected override int SolvePart1(string input)
+    protected override long SolvePart1(string input)
     {
         var schematic = ParseSchematic(input);
 
@@ -27,7 +27,7 @@ internal partial class Solution : AdventOfCode.Solution
         return partNumbers.Select(n => n.Number).Sum();
     }
 
-    protected override int SolvePart2(string input)
+    protected override long SolvePart2(string input)
     {
         var schematic = ParseSchematic(input);
 

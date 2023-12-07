@@ -14,7 +14,7 @@ internal class Solution : AdventOfCode.Solution
 
     private record Game(int Id, Set[] Sets);
 
-    protected override int SolvePart1(string input)
+    protected override long SolvePart1(string input)
     {
         var games = ParseGames(input);
 
@@ -31,7 +31,7 @@ internal class Solution : AdventOfCode.Solution
         return possibleGames.Select(g => g.Id).Sum();
     }
 
-    protected override int SolvePart2(string input)
+    protected override long SolvePart2(string input)
     {
         var games = ParseGames(input);
 
