@@ -15,7 +15,7 @@ internal abstract class Solution
         var input = File.ReadAllText($"./Y{Year}/Day{Day.ToString("00")}/input.txt");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Running solution for day {Day}, {Year} ({Name})");
+        Console.WriteLine($"Day {Day} {Year}: {Name}");
         Console.WriteLine();
 
         var stopwatch = new Stopwatch();
