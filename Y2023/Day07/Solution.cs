@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace AdventOfCode.Y2023.Day07;
 
@@ -16,7 +17,7 @@ internal class Solution : AdventOfCode.Solution
     {
         var hands = ParseHands(input);
 
-        var rankedHands = hands.OrderBy(h => GetHandValue(h.Cards, false));
+        var rankedHands = hands.OrderBy(h => GetHandValue(h.Cards));
 
         var totalWinnings = rankedHands
             .Select((h, i) => h.Bid * (i + 1))
@@ -27,7 +28,15 @@ internal class Solution : AdventOfCode.Solution
 
     protected override long SolvePart2(string input)
     {
-        return 0;
+        var hands = ParseHands(input);
+
+        var rankedHands = hands.OrderBy(h => GetHandValueWithWildcards(h.Cards));
+
+        var totalWinnings = rankedHands
+            .Select((h, i) => h.Bid * (i + 1))
+            .Sum();
+
+        return totalWinnings;
     }
 
     private Hand[] ParseHands(string input)
@@ -47,9 +56,9 @@ internal class Solution : AdventOfCode.Solution
         return cards;
     }
 
-    private long GetHandValue(string hand, bool jIsWildCard)
+    private long GetHandValue(string hand)
     {
-        var cardOrder = jIsWildCard ? "J123456789TQKA" : "123456789TJQKA";
+        var cardOrder = "123456789TJQKA";
 
         var patternValue = GetPatternValue(hand);
         var cardValue = GetCardValue(hand, cardOrder);
@@ -60,6 +69,22 @@ internal class Solution : AdventOfCode.Solution
         }
 
         var value = long.Parse(patternValue.ToString("D5") + cardValue.ToString("D12"));
+
+        return value;
+    }
+
+    private long GetHandValueWithWildcards(string hand)
+    {
+        var cardOrder = "J123456789TQKA";
+
+        var maxPatternValue = cardOrder
+            .Select(c => hand.Replace('J', c))
+            .Select(c => GetPatternValue(c))
+            .Max();
+
+        var cardValue = GetCardValue(hand, cardOrder);
+
+        var value = long.Parse(maxPatternValue.ToString("D5") + cardValue.ToString("D12"));
 
         return value;
     }
