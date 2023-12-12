@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection.PortableExecutable;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Y2023.Day03;
 

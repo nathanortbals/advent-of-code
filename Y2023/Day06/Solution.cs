@@ -1,7 +1,5 @@
 ﻿
-using System.Data.Common;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace AdventOfCode.Y2023.Day06;
 
