@@ -28,7 +28,7 @@ internal class Solution : AdventOfCode.Solution
         { 'J', new int[]{ Left, Up } },
         { 'F', new int[]{ Right, Down } },
         { '7', new int[]{ Left, Down } },
-        { 'S', new int[]{ Left, Right, Up, Down } },
+        { 'S', Array.Empty<int>() },
         { '.', Array.Empty<int>() },
     };
 
@@ -43,7 +43,13 @@ internal class Solution : AdventOfCode.Solution
 
     protected override long SolvePart2(string input)
     {
-        return 0;
+        var maze = ParseMaze(input);
+
+        var loop = FindLoop(maze);
+
+        var numLocationsInsideLoop = CountLocationsInsideLoop(maze, loop);
+
+        return numLocationsInsideLoop;
     }
 
     private Maze ParseMaze(string input)
@@ -91,6 +97,43 @@ internal class Solution : AdventOfCode.Solution
                 .First();
         }
 
+        visitedLocations.Add(startLocation);
+
         return visitedLocations;
+    }
+
+    private int CountLocationsInsideLoop(
+        Maze maze,
+        HashSet<int> loop)
+    {
+        var totalCount = 0;
+
+        for (int row = 0; row < maze.Count() / 140; row++)
+        {
+            var rowCount = 0;
+            var insideLoop = false;
+
+            for (int column = 0; column < 140; column++)
+            {
+                var i = row * 140 + column;
+                var c = maze[i].Type;
+
+                var isApartOfLoop = loop.Contains(i);
+                var isFacingUp = PipeDirections[c].Contains(Up);
+
+                if (isApartOfLoop && isFacingUp)
+                {
+                    insideLoop = !insideLoop;
+                }
+                else if (!isApartOfLoop && insideLoop)
+                {
+                    rowCount++;
+                }
+            }
+
+            totalCount += rowCount;
+        }
+
+        return totalCount;
     }
 }
